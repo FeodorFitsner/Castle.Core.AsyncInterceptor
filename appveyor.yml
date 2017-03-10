@@ -42,9 +42,6 @@ force_https_clone: true
 
 configuration: Release
 
-install:
-- appveyor DownloadFile https://dist.nuget.org/win-x86-commandline/v4.0.0/nuget.exe
-
 #---------------------------------#
 #       build configuration       #
 #---------------------------------#
