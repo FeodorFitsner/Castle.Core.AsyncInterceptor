@@ -23,7 +23,7 @@ branches:
 #---------------------------------#
 
 # Operating system (build VM template)
-os: Visual Studio 2015
+image: Visual Studio 2017
 
 environment:
   COVERALLS_REPO_TOKEN:
@@ -52,25 +52,23 @@ configuration: Release
 #---------------------------------#
 
 before_build:
-  - dotnet restore
+  - NuGet restore
 
-build_script:
-  - dotnet pack src\Castle.Core.AsyncInterceptor --configuration %CONFIGURATION%
+build:
+  publish_nuget: true
+  publish_nuget_symbols: true
+  verbosity: minimal
 
 #---------------------------------#
 #      artifacts configuration    #
 #---------------------------------#
 
 artifacts:
-  - path: src\**\*.nupkg
   - path: test\TestResults
 
 #---------------------------------#
 #       tests configuration       #
 #---------------------------------#
-
-before_test:
-  - dotnet build test\Castle.Core.AsyncInterceptor.Tests --configuration %CONFIGURATION%
 
 test_script:
   - coverage.cmd %CONFIGURATION%
